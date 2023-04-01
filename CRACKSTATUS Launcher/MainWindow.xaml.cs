@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MonoTorrent.Client;
+using MonoTorrent.BEncoding;
+using MonoTorrent.Client.Tracker;
 
 namespace CRACKSTATUS_Launcher
 {
