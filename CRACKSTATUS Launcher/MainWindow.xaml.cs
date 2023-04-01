@@ -22,7 +22,7 @@ namespace CRACKSTATUS_Launcher
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent(); //баха
         }
     }
 }
