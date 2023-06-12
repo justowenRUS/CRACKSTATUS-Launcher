@@ -5,8 +5,105 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CRACKSTATUS_Launcher"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="562" Width="1167">
+    <Window.Resources>
+        <!-- Определение стиля TabToggleButtonStyle -->
+        <Style x:Key="TabToggleButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#ecf0f1"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#333333"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Верхняя плашка с логотипом и названием -->
+        <Border Grid.Row="0" Background="#000000" Height="50" BorderBrush="White" BorderThickness="0 0 0 2">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Image Source="/LOGO_SAJTA.png" Height="41" Width="159" Margin="10"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Левая панель с вкладками -->
+        <Border Grid.Row="1" Width="150" Background="Black" HorizontalAlignment="Left" Margin="0 0 2 0"
+        BorderBrush="White" BorderThickness="2 0 0 0">
+            <Border BorderBrush="White" BorderThickness="0 0 1 0">
+                <StackPanel>
+                    <!-- Вкладка Игры -->
+                    <ToggleButton Style="{StaticResource TabToggleButtonStyle}" IsChecked="True">
+                        <StackPanel>
+                            <Image Source="/game.png" Height="30" Width="30"/>
+                            <TextBlock Text="Игры" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </ToggleButton>
+
+                    <!-- Вкладка Библиотека -->
+                    <ToggleButton Style="{StaticResource TabToggleButtonStyle}">
+                        <StackPanel>
+                            <Image Source="/library.png" Height="30" Width="30"/>
+                            <TextBlock Text="Библиотека" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </ToggleButton>
+
+                    <ToggleButton x:Name="TorrentToggleButton" Style="{StaticResource TabToggleButtonStyle}">
+                        <ToggleButton.Content>
+                            <StackPanel>
+                                <Image Source="/download.png" Height="30" Width="30"/>
+                                <TextBlock Text="Торрент" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </ToggleButton.Content>
+                    </ToggleButton>
+
+                    <!-- Вкладка Настройка -->
+                    <ToggleButton Style="{StaticResource TabToggleButtonStyle}">
+                        <StackPanel>
+                            <Image Source="/settings.png" Height="30" Width="30"/>
+                            <TextBlock Text="Настройка" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </ToggleButton>
+                </StackPanel>
+            </Border>
+        </Border>
+
+        <Grid x:Name="MainContentGrid" Background="Black" Grid.Row="1" Margin="150,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Name ="DownloadStatic" Content="Загрузка: " HorizontalAlignment="Left" Margin="73,54,0,0" VerticalAlignment="Top" Foreground="White"/>
+            <Label Name ="SidStatic" Content="Сиды: " HorizontalAlignment="Left" Margin="203,54,0,0" VerticalAlignment="Top" Foreground="White"/>
+            <ProgressBar Name ="DownloadProgress" HorizontalAlignment="Center" Height="10" Margin="0,64,0,0" VerticalAlignment="Top" Width="100"/>
+            <Label Name ="NameTorrent" Content="" HorizontalAlignment="Left" Margin="332,54,0,0" VerticalAlignment="Top" Foreground="White"/>
+            <Button Name ="SearchTorrent" Click="SearchTorrent_Click" Content="Выбор торрента" HorizontalAlignment="Left" Margin="595,59,0,0" VerticalAlignment="Top"/>
+        </Grid>
     </Grid>
 </Window>
